@@ -24,3 +24,7 @@ Route::get('/info', function(){
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::put('column/sync', [\App\Http\Controllers\ColumnController::class, 'sync']);
+Route::resource('column', \App\Http\Controllers\ColumnController::class);
+Route::resource('card', \App\Http\Controllers\CardController::class);

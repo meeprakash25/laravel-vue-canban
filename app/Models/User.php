@@ -41,4 +41,31 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected static function booted()
+    {
+        static::created(function ($user) {
+            $user->columns()->createMany([
+                [
+                    'title' => 'Backlog',
+                ],
+                [
+                    'title' => 'In Progress',
+                ],
+                [
+                    'title' => 'Done',
+                ]
+            ]);
+        });
+    }
+
+    public function columns()
+    {
+        return $this->hasMany(Column::class);
+    }
+
+    public function cards()
+    {
+        return $this->hasMany(Card::class);
+    }
 }
